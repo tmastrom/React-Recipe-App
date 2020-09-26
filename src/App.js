@@ -1,26 +1,73 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { Component } from 'react';
+import Recipe from './components/Recipe'
 import './App.css';
 
-function App() {
+class App extends Component {
+  constructor(props) {
+    super(props);
+    this.selectNewRecipe = this.selectNewRecipe.bind(this);
+    this.state = {
+      recipes: [
+        {
+          title: 'Camburger',
+          ingredients: [
+            'Cam',
+            'Burger'
+          ],
+          steps: [
+            'In a large bowl combine the Cam and burger',
+            'Enjoy!'
+          ],
+          id: 'camburger'
+        },
+      ],
+      selectedRecipe: null
+    }
+  }
+
+  selectNewRecipe(recipeId) {
+    if(recipeId) {
+      this.setState({
+        ...this.state,
+        selectedRecipe: recipeId
+      });
+    }
+  }
+
+  render(){
+    let recipeToSelect;
+    if(this.state.selectedRecipe) { 
+      const filteredRecipes = this.state.recipes.filter((recipe) => recipe.id === this.state.selectedRecipe);  
+      if(filteredRecipes.length > 0) { 
+        recipeToSelect = filteredRecipes[0];
+      }
+  }
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <aside className='sidebar'>
+        <h1 className="sidebar__title">Recipe Book</h1>
+
+      </aside>
+      {
+        recipeToSelect ? 
+          <Recipe
+          ingredients={recipeToSelect.ingredients}
+          steps={recipeToSelect.steps}
+          title={recipeToSelect.title}
+          />
+          :
+          null
+      }
     </div>
   );
+  }
+  componentDidMount() {
+    const recipeToShow = this.state.recipes[0].id || null;
+    this.setState({
+      ...this.state,
+      selectedRecipe: recipeToShow
+    });
+  }
 }
 
 export default App;
