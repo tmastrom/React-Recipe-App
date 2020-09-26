@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import Recipe from './components/Recipe'
+import Recipe from './components/Recipe';
+import Navigation from './components/Navigation';
 import './App.css';
 
 class App extends Component {
@@ -46,7 +47,11 @@ class App extends Component {
     <div className="App">
       <aside className='sidebar'>
         <h1 className="sidebar__title">Recipe Book</h1>
-
+        <Navigation
+          recipes={this.state.recipes}
+          activeRecipe={this.state.selectedRecipe}
+          recipeToSelect={this.selectNewRecipe}
+        />
       </aside>
       {
         recipeToSelect ? 
