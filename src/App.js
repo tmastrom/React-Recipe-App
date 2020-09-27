@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import Recipe from './components/Recipe';
 import Navigation from './components/Navigation';
+import RecipeCard from './components/Card';
 import './App.css';
+
+import { Row, Col } from 'antd';
 
 class App extends Component {
   constructor(props) {
@@ -19,9 +22,26 @@ class App extends Component {
             'In a large bowl combine the Cam and burger',
             'Enjoy!'
           ],
-          id: 'camburger'
+          id: 'camburger',
+          chef: 'Cam',
+          description: 'A peachy and flavourful vegan cheeseburger topped with fruity surprises.'
+        },
+        {
+          title: 'Tombalaya',
+          ingredients: [
+            'Tom',
+            'Balaya'
+          ],
+          steps: [
+            'In a large bowl combine the Tom and balaya',
+            'Enjoy!'
+          ],
+          id: 'tombalaya',
+          chef: 'Tom',
+          description: 'A peachy and flavourful vegan cheeseburger topped with fruity surprises.'
         },
       ],
+      
       selectedRecipe: null
     }
   }
@@ -45,24 +65,44 @@ class App extends Component {
   }
   return (
     <div className="App">
-      <aside className='sidebar'>
-        <h1 className="sidebar__title">Recipe Book</h1>
-        <Navigation
-          recipes={this.state.recipes}
-          activeRecipe={this.state.selectedRecipe}
-          recipeToSelect={this.selectNewRecipe}
-        />
-      </aside>
-      {
-        recipeToSelect ? 
-          <Recipe
-          ingredients={recipeToSelect.ingredients}
-          steps={recipeToSelect.steps}
-          title={recipeToSelect.title}
+      <Navigation
+        recipes={this.state.recipes}
+        activeRecipe={this.state.selectedRecipe}
+        recipeToSelect={this.selectNewRecipe}
+      />
+      <h1>Cook yourself delicious food, it's not that fucking hard!</h1>
+      <Row>
+        <Col xs={24} lg={12} style={ {'text-align': '-webkit-center'} }>
+          <RecipeCard
+            title={this.state.recipes[0].title}
+            description={this.state.recipes[0].description}
+            instructions={this.state.recipes[0].ingredients[0]}
+            steps={this.state.recipes[0].steps[0]}
           />
-          :
-          null
-      }
+        </Col>
+        <Col xs={24} lg={12} style={ {'text-align': '-webkit-center'} }>
+          <RecipeCard
+            title={this.state.recipes[1].title}
+            description={this.state.recipes[1].description}
+            instructions={this.state.recipes[1].ingredients[0]}
+            steps={this.state.recipes[1].steps[0]}
+          />
+        </Col>
+      </Row>
+      <Row style={ { 'margin-top': '60px' } }>
+        <Col xs={24} lg={12} style={ {'text-align': '-webkit-center'} }>
+          <RecipeCard
+            title={this.state.recipes[0].title}
+            description={this.state.recipes[0].description}
+          />
+        </Col>
+        <Col xs={24} lg={12} style={ {'text-align': '-webkit-center'} }>
+          <RecipeCard
+            title={this.state.recipes[1].title}
+            description={this.state.recipes[1].description}
+          />
+        </Col>
+      </Row>
     </div>
   );
   }

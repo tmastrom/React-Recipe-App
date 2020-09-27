@@ -1,47 +1,37 @@
 import React, { Component } from 'react';
+import { Menu } from 'antd';
 
 import PropTypes from 'prop-types';
 
 class Navigation extends Component {
-    constructor(props){
-        super(props);
-        this.changeRecipe = this.changeRecipe.bind(this);
-    }
+  state = {
+    current: 'mail',
+  };
 
-    changeRecipe(e) {
-        const buttonId = e.target.id;
-        const recipeId = buttonId.split('_')[0];
-        this.props.recipeToSelect(recipeId);
-    }
-    render() {
-        return(
-          <div className="Navigation">
-            <nav className="Navigation__nav">
-              <ul className="Navigation__list">
-                {
-                  this.props.recipes.map((recipe) => 
-                    <li>
-                      <button 
-                        id={recipe.id + '_button'} 
-                        key={recipe.id}
-                        onClick={this.changeRecipe}
-                        className={
-                          recipe.id  === this.props.activeRecipe  ? 
-                            'Navigation__button Navigation__button--active' 
-                            : 
-                            'Navigation__button'
-                        }
-                      >
-                        {recipe.title}
-                      </button>
-                    </li>
-                  )
-                }
-              </ul>
-            </nav>
-          </div>
-        );
-    }
+  handleClick = e => {
+    console.log('click ', e);
+    this.setState({ current: e.key });
+  };
+  render() {
+    const { SubMenu } = Menu;
+    const { current } = this.state;
+    return(
+      <Menu onClick={this.handleClick} selectedKeys={[current]} mode="horizontal">
+        <SubMenu key="CamRecipes" title="Cam's Recipes">
+          <Menu.Item key="camburger">Camburger</Menu.Item>
+        </SubMenu>
+        <SubMenu key="TomRecipes" title="Tom's Recipes">
+          <Menu.Item key="tombalaya">Tombalaya</Menu.Item>
+        </SubMenu>
+        <SubMenu key="RachelRecipes" title="Rachel's Recipes">
+          <Menu.Item key="openfacedsammy">Open Faced Sandwich</Menu.Item>
+        </SubMenu>
+        <SubMenu key="EliseRecipes" title="Elise's Recipes">
+          <Menu.Item key="ramen">Special Ramen</Menu.Item>
+        </SubMenu>
+      </Menu>
+    );
+  }
 }
 
 Navigation.propTypes = {
