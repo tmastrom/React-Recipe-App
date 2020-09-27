@@ -72,7 +72,7 @@ class App extends Component {
       />
       <h1>Cook yourself delicious food, it's not that fucking hard!</h1>
       <Row>
-        <Col xs={24} lg={12} style={ {'text-align': '-webkit-center'} }>
+        <Col xs={24} lg={12} style={ {'text-align': '-webkit-center', 'margin-top': '60px'} }>
           <RecipeCard
             title={this.state.recipes[0].title}
             description={this.state.recipes[0].description}
@@ -80,7 +80,7 @@ class App extends Component {
             steps={this.state.recipes[0].steps[0]}
           />
         </Col>
-        <Col xs={24} lg={12} style={ {'text-align': '-webkit-center'} }>
+        <Col xs={24} lg={12} style={ {'text-align': '-webkit-center', 'margin-top': '60px'} }>
           <RecipeCard
             title={this.state.recipes[1].title}
             description={this.state.recipes[1].description}
@@ -89,14 +89,14 @@ class App extends Component {
           />
         </Col>
       </Row>
-      <Row style={ { 'margin-top': '60px' } }>
-        <Col xs={24} lg={12} style={ {'text-align': '-webkit-center'} }>
+      <Row>
+        <Col xs={24} lg={12} style={ {'text-align': '-webkit-center', 'margin-top': '60px'} }>
           <RecipeCard
             title={this.state.recipes[0].title}
             description={this.state.recipes[0].description}
           />
         </Col>
-        <Col xs={24} lg={12} style={ {'text-align': '-webkit-center'} }>
+        <Col xs={24} lg={12} style={ {'text-align': '-webkit-center', 'margin-top': '60px'} }>
           <RecipeCard
             title={this.state.recipes[1].title}
             description={this.state.recipes[1].description}
