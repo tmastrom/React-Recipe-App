@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { Menu } from 'antd';
+import { Link } from 'react-router-dom'
 
 import PropTypes from 'prop-types';
 
 class Navigation extends Component {
   state = {
-    current: 'mail',
+    current: 'home',
   };
 
   handleClick = e => {
@@ -13,22 +14,29 @@ class Navigation extends Component {
     this.setState({ current: e.key });
   };
   render() {
-    const { SubMenu } = Menu;
     const { current } = this.state;
     return(
       <Menu onClick={this.handleClick} selectedKeys={[current]} mode="horizontal">
-        <SubMenu key="CamRecipes" title="Cam's Recipes">
-          <Menu.Item key="camburger">Camburger</Menu.Item>
-        </SubMenu>
-        <SubMenu key="TomRecipes" title="Tom's Recipes">
-          <Menu.Item key="tombalaya">Tombalaya</Menu.Item>
-        </SubMenu>
-        <SubMenu key="RachelRecipes" title="Rachel's Recipes">
-          <Menu.Item key="openfacedsammy">Open Faced Sandwich</Menu.Item>
-        </SubMenu>
-        <SubMenu key="EliseRecipes" title="Elise's Recipes">
-          <Menu.Item key="ramen">Special Ramen</Menu.Item>
-        </SubMenu>
+        {/* <Link to='/cam'> */}
+          <Menu.Item key="CamRecipes">
+            <Link to='/cam'>Cam's Recipes</Link>
+          </Menu.Item>
+        {/* </Link> */}
+        {/* <Link to='/tom'> */}
+          <Menu.Item key="TomRecipes">
+            <Link to='/tom'>Tom's Recipes</Link>
+          </Menu.Item>
+        {/* </Link> */}
+        {/* <Link to='/rachel'> */}
+          <Menu.Item key="RachelRecipes">
+            <Link to='/rachel'>Rachel's Recipes</Link>
+          </Menu.Item>
+        {/* </Link> */}
+        {/* <Link to='/elise'> */}
+          <Menu.Item key="EliseRecipes">
+            <Link to='/elise'>Elise's Recipes</Link>
+          </Menu.Item>
+        {/* </Link> */}
       </Menu>
     );
   }

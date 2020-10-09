@@ -1,13 +1,27 @@
 import React, { Component } from 'react';
 import { Card, Avatar } from 'antd';
-import { EditOutlined, EllipsisOutlined, SettingOutlined } from '@ant-design/icons';
+import { QuestionCircleOutlined, OrderedListOutlined, UnorderedListOutlined } from '@ant-design/icons';
 
 class RecipeCard extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            enabled: 'setting'
+            enabled: 'description'
         };
+    }
+
+    displaySteps = () => {
+        let stepsLength = this.props.steps.length;
+        let steps = '';
+
+        for (let i = 0; i > stepsLength; i += 1) {
+            if (i = stepsLength - 1) {
+                // 
+            }
+            else {
+
+            }
+        }
     }
 
     changeDisplay = (display) => {
@@ -15,16 +29,21 @@ class RecipeCard extends Component {
     }
 
     changeDescription = () => {
-        if (this.state.enabled === 'setting') {
+        if (this.state.enabled === 'description') {
+            console.log(this.props.description);
             return this.props.description;
         }
-        else if (this.state.enabled === 'edit') {
+        else if (this.state.enabled === 'instructions') {
+            console.log(this.props.instructions);
             return this.props.instructions;
         }
-        else if (this.state.enabled === 'ellipsis') {
+        else if (this.state.enabled === 'ingredients') {
+            console.log(this.props.steps);
             return this.props.steps;
         }
     }
+
+
 
     render() {
         const { Meta } = Card;
@@ -32,15 +51,15 @@ class RecipeCard extends Component {
             <Card
                 style={{ width: 300 }}
                 cover={
-                <img
-                    alt="example"
-                    src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"
-                />
+                    <img
+                        alt="example"
+                        src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"
+                    />
                 }
                 actions={[
-                    <SettingOutlined key="setting" onClick={ () => { this.setState({ enabled: 'setting' }) } }/>,
-                    <EditOutlined key="edit" onClick={ () => { this.setState({ enabled: 'edit' }) } }/>,
-                    <EllipsisOutlined key="ellipsis" onClick={ () => { this.setState({ enabled: 'ellipsis' }) } }/>,
+                    <QuestionCircleOutlined key="description" onClick={ () => { this.setState({ enabled: 'description' }) } }/>,
+                    <OrderedListOutlined key="instructions" onClick={ () => { this.setState({ enabled: 'instructions' }) } }/>,
+                    <UnorderedListOutlined key="ingredients" onClick={ () => { this.setState({ enabled: 'ingredients' }) } }/>,
                 ]}
             >
                 <Meta

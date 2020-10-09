@@ -1,15 +1,18 @@
 import React, { Component } from 'react';
-import Recipe from './components/Recipe';
 import Navigation from './components/Navigation';
-import RecipeCard from './components/Card';
+import Home from './pages/Home';
+import Cam from './pages/Cam';
+import Rachel from './pages/Rachel';
+import Tom from './pages/Tom';
+import Elise from './pages/Elise';
+import FourOhFour from './pages/404';
 import './App.css';
 
-import { Row, Col } from 'antd';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 class App extends Component {
   constructor(props) {
     super(props);
-    this.selectNewRecipe = this.selectNewRecipe.bind(this);
     this.state = {
       recipes: [
         {
@@ -46,72 +49,26 @@ class App extends Component {
     }
   }
 
-  selectNewRecipe(recipeId) {
-    if(recipeId) {
-      this.setState({
-        ...this.state,
-        selectedRecipe: recipeId
-      });
-    }
-  }
-
-  render(){
-    let recipeToSelect;
-    if(this.state.selectedRecipe) { 
-      const filteredRecipes = this.state.recipes.filter((recipe) => recipe.id === this.state.selectedRecipe);  
-      if(filteredRecipes.length > 0) { 
-        recipeToSelect = filteredRecipes[0];
-      }
-  }
-  return (
-    <div className="App">
-      <Navigation
-        recipes={this.state.recipes}
-        activeRecipe={this.state.selectedRecipe}
-        recipeToSelect={this.selectNewRecipe}
-      />
-      <h1>Cook yourself delicious food, it's not that fucking hard!</h1>
-      <Row>
-        <Col xs={24} lg={12} style={ {'text-align': '-webkit-center', 'margin-top': '60px'} }>
-          <RecipeCard
-            title={this.state.recipes[0].title}
-            description={this.state.recipes[0].description}
-            instructions={this.state.recipes[0].ingredients[0]}
-            steps={this.state.recipes[0].steps[0]}
+  render() {
+    return (
+      <Router>
+        <div>
+          <Navigation
+            recipes={this.state.recipes}
+            activeRecipe={this.state.selectedRecipe}
+            recipeToSelect={this.selectNewRecipe}
           />
-        </Col>
-        <Col xs={24} lg={12} style={ {'text-align': '-webkit-center', 'margin-top': '60px'} }>
-          <RecipeCard
-            title={this.state.recipes[1].title}
-            description={this.state.recipes[1].description}
-            instructions={this.state.recipes[1].ingredients[0]}
-            steps={this.state.recipes[1].steps[0]}
-          />
-        </Col>
-      </Row>
-      <Row>
-        <Col xs={24} lg={12} style={ {'text-align': '-webkit-center', 'margin-top': '60px'} }>
-          <RecipeCard
-            title={this.state.recipes[0].title}
-            description={this.state.recipes[0].description}
-          />
-        </Col>
-        <Col xs={24} lg={12} style={ {'text-align': '-webkit-center', 'margin-top': '60px'} }>
-          <RecipeCard
-            title={this.state.recipes[1].title}
-            description={this.state.recipes[1].description}
-          />
-        </Col>
-      </Row>
-    </div>
-  );
-  }
-  componentDidMount() {
-    const recipeToShow = this.state.recipes[0].id || null;
-    this.setState({
-      ...this.state,
-      selectedRecipe: recipeToShow
-    });
+          <Switch>
+            <Route exact path="/" component={Home}/>
+            <Route path="/cam" component={Cam}/>
+            <Route path="/rachel" component={Rachel}/>
+            <Route path="/tom" component={Tom}/>
+            <Route path="/elise" component={Elise}/>
+            <Route default component={FourOhFour}/>
+          </Switch>
+        </div>
+      </Router>
+    )
   }
 }
 
